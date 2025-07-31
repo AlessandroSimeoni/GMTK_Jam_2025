@@ -66,6 +66,7 @@ void ACharacterController::HandleMoveAction(const struct FInputActionValue& Valu
 void ACharacterController::HandleJumpAction(const struct FInputActionValue& Value)
 {
 	PossessedMainCharacter->GetAbilitySystemComponent()->TryActivateAbilitiesByTag(FGameplayTagContainer(PossessedMainCharacter->JumpTag));
+	PossessedMainCharacter->GetAbilitySystemComponent()->TryActivateAbilitiesByTag(FGameplayTagContainer(PossessedMainCharacter->WallJumpTag));
 }
 
 void ACharacterController::ToggleControls(bool Value)
