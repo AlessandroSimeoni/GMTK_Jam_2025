@@ -22,4 +22,6 @@ public:
 	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
 	FGameplayAttributeData PlayerSpeed;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,PlayerSpeed);
+
+	
 };
