@@ -3,6 +3,7 @@
 
 #include "Character/CharacterController.h"
 
+#include "AbilitySystemComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Character/MainCharacter.h"
@@ -64,7 +65,7 @@ void ACharacterController::HandleMoveAction(const struct FInputActionValue& Valu
 
 void ACharacterController::HandleJumpAction(const struct FInputActionValue& Value)
 {
-	PossessedMainCharacter->Jump();
+	PossessedMainCharacter->GetAbilitySystemComponent()->TryActivateAbilitiesByTag(FGameplayTagContainer(PossessedMainCharacter->JumpTag));
 }
 
 void ACharacterController::ToggleControls(bool Value)

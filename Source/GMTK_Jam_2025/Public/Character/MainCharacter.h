@@ -22,6 +22,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="GAS")
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbility;
 
+	
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void PossessedBy(AController* NewController) override;
@@ -33,6 +34,9 @@ protected:
 	const UPlayerAttributeSet* AttributeSet;
 	
 public:
+	UPROPERTY(EditDefaultsOnly, Category="GAS")
+	FGameplayTag JumpTag;
+	
 	AMainCharacter();
 
 	UFUNCTION(BlueprintCallable, Category="Locomotion")

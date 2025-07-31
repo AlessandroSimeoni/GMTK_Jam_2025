@@ -37,11 +37,25 @@ void AMainCharacter::Tick(float DeltaTime)
 	}
 	
 	ConsumeMovement();
+
+	if (GetMovementComponent()->IsFalling())
+	{
+		//TODO: check wall run
+	}
+
+	
 }
 
 void AMainCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
+	
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(this,this);
+	}
+
+	SetOwner(NewController);
 }
 
 void AMainCharacter::GiveDefaultAbility()
@@ -65,7 +79,6 @@ void AMainCharacter::ConsumeMovement()
 	
 	AddMovementInput(MovementDirection * AttributeSet->GetPlayerSpeed());
 	MovementDirection = FVector::ZeroVector;
-	
 }
 
 void AMainCharacter::AddMovementDirection(FVector Direction)
