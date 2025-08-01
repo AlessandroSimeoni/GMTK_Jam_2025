@@ -29,7 +29,7 @@ void UWallRunAbility::DoWallRun(AMainCharacter* TargetCharacter)
 	bool WallHit = GetWorld()->LineTraceSingleByChannel(WallHitResult,
 													  TargetCharacter->GetWallCheckOrigin(),
 													  TargetCharacter->GetWallCheckOrigin() + WallRayDirection,
-													  ECC_GameTraceChannel1);
+													  TargetCharacter->WallRunTraceChannel);
 
 	// se finisce il muro: end ability
 	if (!WallHit)
