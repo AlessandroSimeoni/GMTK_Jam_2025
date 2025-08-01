@@ -34,6 +34,11 @@ void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (GetCharacterMovement()->Velocity.Z < 0 && CanWallRun())
+	{
+		AbilitySystemComponent->TryActivateAbilitiesByTag(FGameplayTagContainer(WallRunTag));
+	}
+
 	if (MovementDirection == FVector::ZeroVector)
 	{
 		LastMovementDirection = MovementDirection;
