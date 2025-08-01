@@ -197,6 +197,28 @@ void AMainCharacter::SpawnShell()
 	OnShellCreated.Broadcast();
 }
 
+void AMainCharacter::SafeTeleport(FVector TargetLocation)
+{
+	SetActorLocation(TargetLocation);
+	
+	FHitResult HitResult;
+	bool Hit = GetWorld()->LineTraceSingleByChannel(HitResult,
+												   GetActorLocation(),
+												   GetActorLocation() + GetActorUpVector() * 100.0f,
+												   ECC_Visibility, CollisionParams);
+
+	if (Hit)
+	{
+		if (HitResult.GetActor()->IsA<ACharacterShell>())
+		{
+			ACharacterShell* Shell = Cast<ACharacterShell>(HitResult.GetActor());
+			Shell->DestroyShell();
+			SpawnedShells.Remove(Shell);
+			OnShellDestroyed.Broadcast();
+		}
+	}
+}
+
 bool AMainCharacter::IsVerticalWall(const FHitResult& TargetHitResult) const
 {
 	return FVector::DotProduct(GetActorUpVector(), TargetHitResult.Normal) == 0.0f;
