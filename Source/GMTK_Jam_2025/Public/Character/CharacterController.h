@@ -22,6 +22,12 @@ protected:
 	TObjectPtr<class UInputAction> MoveAction;
 	UPROPERTY(EditDefaultsOnly, Category = "Input Mapping|Locomotion")
 	TObjectPtr<UInputAction> JumpAction;
+	UPROPERTY(EditDefaultsOnly, Category = "Input Mapping|Action")
+	TObjectPtr<class UInputMappingContext> ActionMappingContext;
+	UPROPERTY(EditDefaultsOnly, Category = "Input Mapping|Action")
+	TObjectPtr<UInputAction> CloneDeathAction;
+	UPROPERTY(EditDefaultsOnly, Category = "Input Mapping|Action")
+	TObjectPtr<UInputAction> DestroyCloneAction;
 	
 	UPROPERTY(BlueprintReadOnly)
 	AMainCharacter* PossessedMainCharacter = nullptr;
@@ -36,6 +42,10 @@ protected:
 	void HandleMoveAction(const struct FInputActionValue & Value);
 	UFUNCTION()
 	void HandleJumpAction(const struct FInputActionValue & Value);
+	UFUNCTION()
+	void HandleCloneDeathAction(const struct FInputActionValue & Value);
+	UFUNCTION()
+	void HandleDestroyCloneAction(const struct FInputActionValue & Value);
 
 public:
 	FVector MovementDirection;
