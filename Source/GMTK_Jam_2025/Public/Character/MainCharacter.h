@@ -98,7 +98,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category="CloneDeath")
 	void CloneDeath();
 	UFUNCTION(BlueprintCallable, Category="CloneDeath")
-	void DestroyClone();
+	void DestroyClone(bool MostRecent = true);
 	UFUNCTION(BlueprintCallable, Category="CloneDeath")
 	void SpawnShell();
 	UFUNCTION(BlueprintCallable, Category="CloneDeath")
