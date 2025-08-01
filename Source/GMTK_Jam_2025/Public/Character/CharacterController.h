@@ -28,6 +28,8 @@ protected:
 	TObjectPtr<UInputAction> CloneDeathAction;
 	UPROPERTY(EditDefaultsOnly, Category = "Input Mapping|Action")
 	TObjectPtr<UInputAction> DestroyCloneAction;
+	UPROPERTY(EditDefaultsOnly, Category = "Input Mapping|Action")
+	TObjectPtr<UInputAction> PauseAction;
 	
 	UPROPERTY(BlueprintReadOnly)
 	AMainCharacter* PossessedMainCharacter = nullptr;
@@ -46,6 +48,8 @@ protected:
 	void HandleCloneDeathAction(const struct FInputActionValue & Value);
 	UFUNCTION()
 	void HandleDestroyCloneAction(const struct FInputActionValue & Value);
+	UFUNCTION(BlueprintCallable)
+	void HandlePause(const struct FInputActionValue & Value);
 
 public:
 	FVector MovementDirection;
@@ -53,4 +57,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ToggleControls(bool Value);
 	void SetInputContextEnabled(UInputMappingContext * Context, bool bEnabled, int Priority = 1) const;
+	UFUNCTION(BlueprintImplementableEvent)
+	void PauseGame();
 };
+
+
