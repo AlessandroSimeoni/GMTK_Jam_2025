@@ -167,16 +167,16 @@ void AMainCharacter::CloneDeath()
 	AbilitySystemComponent->TryActivateAbilitiesByTag(FGameplayTagContainer(CloneDeathTag));
 }
 
-void AMainCharacter::DestroyClone()
+void AMainCharacter::DestroyClone(bool MostRecent)
 {
 	if (SpawnedShells.Num() == 0)
 	{
 		return;
 	}
 
-	// destroy the most recent clone
-	SpawnedShells[SpawnedShells.Num()-1]->DestroyShell();
-	SpawnedShells.RemoveAt(SpawnedShells.Num()-1);
+	int Index = (MostRecent ? SpawnedShells.Num()-1 : 0);
+	SpawnedShells[Index]->DestroyShell();
+	SpawnedShells.RemoveAt(Index);
 	OnShellDestroyed.Broadcast();
 }
 
@@ -189,7 +189,7 @@ void AMainCharacter::SpawnShell()
 
 	if (SpawnedShells.Num() == MaxSpawnedShells)
 	{
-		DestroyClone();
+		DestroyClone(false);
 	}
 	
 	ACharacterShell* ShellInstance = GetWorld()->SpawnActor<ACharacterShell>(CharacterShellClass, GetActorLocation(), GetActorRotation());
