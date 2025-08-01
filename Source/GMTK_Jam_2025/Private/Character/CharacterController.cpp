@@ -21,6 +21,7 @@ void ACharacterController::SetupInputComponent()
 	enhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ThisClass::HandleJumpAction);
 	enhancedInputComponent->BindAction(CloneDeathAction, ETriggerEvent::Started, this, &ThisClass::HandleCloneDeathAction);
 	enhancedInputComponent->BindAction(DestroyCloneAction, ETriggerEvent::Started, this, &ThisClass::HandleDestroyCloneAction);
+	enhancedInputComponent->BindAction(PauseAction, ETriggerEvent::Started, this, &ThisClass::HandlePause);
 }
 
 void ACharacterController::OnPossess(APawn* PossessedPawn)
@@ -115,4 +116,9 @@ class UEnhancedInputLocalPlayerSubsystem* ACharacterController::GetInputSubsyste
 
 	//	Get enhanced input subsystem
 	return LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
+}
+
+void ACharacterController::HandlePause(const struct FInputActionValue& Value)
+{
+	PauseGame();
 }

@@ -101,6 +101,10 @@ public:
 	void DestroyClone();
 	UFUNCTION(BlueprintCallable, Category="CloneDeath")
 	void SpawnShell();
+	UFUNCTION(BlueprintCallable, Category="CloneDeath")
+	void SafeTeleport(FVector TargetLocation);
+	UFUNCTION(BlueprintCallable, Category="Shells")
+	int32 GetMaxSpawnedShells() { return MaxSpawnedShells;};
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual bool Hit_Implementation(float DamageValue, AActor* AttackInstigator) override;

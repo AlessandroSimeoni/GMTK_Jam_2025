@@ -29,6 +29,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* CapsuleVisualMesh;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UMaterialInstanceDynamic* PressurePlateMaterialInstance;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool IsActivated = false;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
