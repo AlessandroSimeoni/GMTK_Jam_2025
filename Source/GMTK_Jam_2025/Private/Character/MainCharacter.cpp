@@ -104,12 +104,12 @@ bool AMainCharacter::CanWallRun()
 	bool RightWallHit = GetWorld()->LineTraceSingleByChannel(RightWallRayHitResult,
 														   GetWallCheckOrigin(),
 														   GetWallCheckOrigin() + GetActorRightVector() * WallRayLength,
-														   ECC_GameTraceChannel1, CollisionParams);
+														   WallRunTraceChannel, CollisionParams);
 
 	bool LeftWallHit = GetWorld()->LineTraceSingleByChannel(LeftWallRayHitResult,
 														  GetWallCheckOrigin(),
 														  GetWallCheckOrigin() + GetActorRightVector() * -WallRayLength,
-														  ECC_GameTraceChannel1, CollisionParams);
+														  WallRunTraceChannel, CollisionParams);
 
 	if (DebugWallRays)
 	{

@@ -30,6 +30,7 @@ protected:
 	float WallRunTriggerDotThreshold = 0.7f;
 	UPROPERTY(EditAnywhere, Category="Locomotion|WallRun")
 	bool DebugWallRays = false;
+
 	
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
@@ -58,6 +59,8 @@ public:
 	bool IsRightWall = false;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Locomotion|WallRun", Meta = (UIMin = 0.0f, ClampMin = 0.0f))
 	float WallRayLength = 25.0f;
+	UPROPERTY(EditDefaultsOnly, Category = "Locomotion|WallRun")
+	TEnumAsByte<ECollisionChannel> WallRunTraceChannel = ECC_GameTraceChannel2;
 	
 	AMainCharacter();
 
