@@ -174,9 +174,9 @@ void AMainCharacter::DestroyClone()
 		return;
 	}
 
-	// destroy the least recent clone
-	SpawnedShells[0]->DestroyShell();
-	SpawnedShells.RemoveAt(0);
+	// destroy the most recent clone
+	SpawnedShells[SpawnedShells.Num()-1]->DestroyShell();
+	SpawnedShells.RemoveAt(SpawnedShells.Num()-1);
 	OnShellDestroyed.Broadcast();
 }
 
