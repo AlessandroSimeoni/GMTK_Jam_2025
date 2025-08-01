@@ -4,6 +4,7 @@
 #include "Character/MainCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "Character/CharacterShell.h"
 #include "Character/GAS/PlayerAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -99,6 +100,12 @@ UAbilitySystemComponent* AMainCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+bool AMainCharacter::Hit_Implementation(float DamageValue, AActor* AttackInstigator)
+{
+	AbilitySystemComponent->TryActivateAbilitiesByTag(FGameplayTagContainer(DeathTag));
+	return true;
+}
+
 bool AMainCharacter::CanWallRun()
 {
 	bool RightWallHit = GetWorld()->LineTraceSingleByChannel(RightWallRayHitResult,
@@ -153,6 +160,41 @@ FVector AMainCharacter::CalculateWallDirection(const FHitResult& TargetHitResult
 		WallDirection *= -1;
 
 	return WallDirection;
+}
+
+void AMainCharacter::CloneDeath()
+{
+	AbilitySystemComponent->TryActivateAbilitiesByTag(FGameplayTagContainer(CloneDeathTag));
+}
+
+void AMainCharacter::DestroyClone()
+{
+	if (SpawnedShells.Num() == 0)
+	{
+		return;
+	}
+
+	// destroy the least recent clone
+	SpawnedShells[0]->DestroyShell();
+	SpawnedShells.RemoveAt(0);
+	OnShellDestroyed.Broadcast();
+}
+
+void AMainCharacter::SpawnShell()
+{
+	if (!CharacterShellClass)
+	{
+		return;
+	}
+
+	if (SpawnedShells.Num() == MaxSpawnedShells)
+	{
+		DestroyClone();
+	}
+	
+	ACharacterShell* ShellInstance = GetWorld()->SpawnActor<ACharacterShell>(CharacterShellClass, GetActorLocation(), GetActorRotation());
+	SpawnedShells.Add(ShellInstance);
+	OnShellCreated.Broadcast();
 }
 
 bool AMainCharacter::IsVerticalWall(const FHitResult& TargetHitResult) const

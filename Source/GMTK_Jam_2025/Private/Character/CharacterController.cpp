@@ -16,16 +16,16 @@ void ACharacterController::SetupInputComponent()
 	UEnhancedInputComponent * enhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 	if(!enhancedInputComponent)
 		return;
-
 	
 	enhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::HandleMoveAction);
-	enhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::HandleJumpAction);
+	enhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ThisClass::HandleJumpAction);
+	enhancedInputComponent->BindAction(CloneDeathAction, ETriggerEvent::Started, this, &ThisClass::HandleCloneDeathAction);
+	enhancedInputComponent->BindAction(DestroyCloneAction, ETriggerEvent::Started, this, &ThisClass::HandleDestroyCloneAction);
 }
 
 void ACharacterController::OnPossess(APawn* PossessedPawn)
 {
 	Super::OnPossess(PossessedPawn);
-
 	
 	PossessedMainCharacter = Cast<AMainCharacter>(PossessedPawn);
 	ToggleControls(true);
@@ -69,9 +69,20 @@ void ACharacterController::HandleJumpAction(const struct FInputActionValue& Valu
 	PossessedMainCharacter->GetAbilitySystemComponent()->TryActivateAbilitiesByTag(FGameplayTagContainer(PossessedMainCharacter->WallJumpTag));
 }
 
+void ACharacterController::HandleCloneDeathAction(const struct FInputActionValue& Value)
+{
+	PossessedMainCharacter->CloneDeath();
+}
+
+void ACharacterController::HandleDestroyCloneAction(const struct FInputActionValue& Value)
+{
+	PossessedMainCharacter->DestroyClone();
+}
+
 void ACharacterController::ToggleControls(bool Value)
 {
 	SetInputContextEnabled(LocomotionMappingContext, Value);
+	SetInputContextEnabled(ActionMappingContext, Value);
 }
 
 void ACharacterController::SetInputContextEnabled(UInputMappingContext* Context, bool bEnabled, int Priority) const
