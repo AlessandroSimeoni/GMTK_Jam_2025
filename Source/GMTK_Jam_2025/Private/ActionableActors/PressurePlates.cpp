@@ -36,6 +36,11 @@ void APressurePlates::BeginPlay()
 		PressurePlateArea -> OnComponentBeginOverlap.AddDynamic(this, &APressurePlates::OnPressurePlateBeginOverlap);
 		PressurePlateArea -> OnComponentEndOverlap.AddDynamic(this, &APressurePlates::OnPressurePlateEndOverlap);
 	}
+	if (CapsuleVisualMesh)
+	{
+		PressurePlateMaterialInstance = CapsuleVisualMesh ->CreateAndSetMaterialInstanceDynamic(0);
+		PressurePlateMaterialInstance-> SetScalarParameterValue(FName("LerpParam"), 0);
+	}
 }
 
 void APressurePlates::OnPressurePlateBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -79,6 +84,10 @@ void APressurePlates::ActivateActors()
 		}
 	}
 	IsActivated = true;
+	if (PressurePlateMaterialInstance)
+	{
+		PressurePlateMaterialInstance-> SetScalarParameterValue(FName("LerpParam"), 1);
+	}
 }
 
 void APressurePlates::DeactivateActors()
@@ -93,4 +102,8 @@ void APressurePlates::DeactivateActors()
 		}
 	}
 	IsActivated = false;
+	if (PressurePlateMaterialInstance)
+	{
+		PressurePlateMaterialInstance-> SetScalarParameterValue(FName("LerpParam"), 0);
+	}
 }

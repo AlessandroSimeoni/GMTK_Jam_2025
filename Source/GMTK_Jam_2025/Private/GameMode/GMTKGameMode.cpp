@@ -3,6 +3,8 @@
 
 #include "GameMode/GMTKGameMode.h"
 
+#include "GameMode/ThresholdDataAsset.h"
+#include "GameMode/TimeThresoldStruct.h"
 #include "Kismet/GameplayStatics.h"
 
 void AGMTKGameMode::BeginPlay()
@@ -16,4 +18,24 @@ void AGMTKGameMode::BeginPlay()
 		Controller->SetInputMode(InputMode);
 		Controller->SetShowMouseCursor(false);
 	}
+	CurrentTime = 0.0f;
+}
+
+FName AGMTKGameMode::ReturnScore()
+{
+	if (!ThresholdDataAsset) return FName("None");
+	for (const FTimeThresoldStruct& Entry : ThresholdDataAsset -> Thresholds)
+	{
+		if (CurrentTime <= Entry.MaxTime)
+		{
+			return Entry.ThresholdName;
+		}
+	}
+	return FName("None");
+}
+
+void AGMTKGameMode::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	CurrentTime += DeltaSeconds;
 }
