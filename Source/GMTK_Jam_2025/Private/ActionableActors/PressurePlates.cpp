@@ -17,9 +17,10 @@ APressurePlates::APressurePlates()
 	PressurePlateArea -> SetGenerateOverlapEvents(true);
 	PressurePlateArea -> SetHiddenInGame(true);
 	PressurePlateArea -> SetMobility(EComponentMobility::Movable);
-
+	PressurePlateArea->SetupAttachment(RootScene);
+	
 	PressurePlateMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Trigger Mesh"));
-	PressurePlateMesh->SetupAttachment(RootComponent);
+	PressurePlateMesh->SetupAttachment(RootScene);
 
 	CapsuleVisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CapsuleVisual"));
 	CapsuleVisualMesh -> SetupAttachment(PressurePlateArea);
