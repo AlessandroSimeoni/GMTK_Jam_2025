@@ -17,4 +17,7 @@ public:
 	// The maximum time to achieve this medal
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float MaxTime = 0.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText ThresholdPhrase;
 };
