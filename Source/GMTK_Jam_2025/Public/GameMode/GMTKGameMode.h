@@ -22,7 +22,7 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	float CurrentTime = 0.0f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UThresholdDataAsset> ThresholdDataAsset;
 	virtual void Tick(float DeltaSeconds) override;
 };
