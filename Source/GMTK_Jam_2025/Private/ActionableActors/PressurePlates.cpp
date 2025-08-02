@@ -4,7 +4,9 @@
 #include "ActionableActors/PressurePlates.h"
 
 #include "ActionableActors/ActionableClass.h"
+#include "Components/AudioComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 APressurePlates::APressurePlates()
 {
@@ -88,6 +90,16 @@ void APressurePlates::ActivateActors()
 	{
 		PressurePlateMaterialInstance-> SetScalarParameterValue(FName("LerpParam"), 1);
 	}
+	if (ActivationAudioComponent && ActivationAudioComponent -> IsPlaying())
+	{
+		ActivationAudioComponent -> Stop();
+		ActivationAudioComponent -> DestroyComponent();
+		ActivationAudioComponent = nullptr;
+	}
+	if (ActivationSound)
+	{
+		ActivationAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), ActivationSound, 1.0f, 1.0f, 0.0f, nullptr, false);
+	}
 }
 
 void APressurePlates::DeactivateActors()
@@ -105,5 +117,11 @@ void APressurePlates::DeactivateActors()
 	if (PressurePlateMaterialInstance)
 	{
 		PressurePlateMaterialInstance-> SetScalarParameterValue(FName("LerpParam"), 0);
+	}
+	if (ActivationAudioComponent != nullptr)
+	{
+		ActivationAudioComponent -> Stop();
+		ActivationAudioComponent -> DestroyComponent();
+		ActivationAudioComponent = nullptr;
 	}
 }
