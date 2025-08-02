@@ -36,6 +36,10 @@ protected:
 	bool IsActivated = false;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 OverlappedActors = 0;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	USoundBase* ActivationSound;
+	UPROPERTY(Transient)
+	TObjectPtr<UAudioComponent> ActivationAudioComponent;
 
 public:
 	virtual void BeginPlay() override;

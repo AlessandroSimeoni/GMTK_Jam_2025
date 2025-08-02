@@ -10,7 +10,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType)
 class GMTK_JAM_2025_API UThresholdDataAsset : public UDataAsset
 {
 	GENERATED_BODY()
