@@ -13,10 +13,11 @@ UCLASS()
 class GMTK_JAM_2025_API UCharacterAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
-	
+
+protected:
 	UPROPERTY()
 	APawn * OwnerPawn;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	class AMainCharacter * OwnerCharacter;
 	
 public:
