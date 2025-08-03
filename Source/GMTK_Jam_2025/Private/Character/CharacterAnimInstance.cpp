@@ -21,7 +21,9 @@ void UCharacterAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	if (OwnerPawn)
 	{
-		PlayerVelocity = OwnerPawn->GetMovementComponent()->Velocity.SquaredLength();
+		FVector Velocity =  OwnerPawn->GetMovementComponent()->Velocity;
+		Velocity.Z = 0.0f;
+		PlayerVelocity = Velocity.SquaredLength();
 	}
 }
 

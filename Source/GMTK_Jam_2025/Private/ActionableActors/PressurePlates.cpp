@@ -90,6 +90,12 @@ void APressurePlates::ActivateActors()
 	{
 		PressurePlateMaterialInstance-> SetScalarParameterValue(FName("LerpParam"), 1);
 	}
+	if (DeactivationAudioComponent != nullptr)
+	{
+		DeactivationAudioComponent -> Stop();
+		DeactivationAudioComponent -> DestroyComponent();
+		DeactivationAudioComponent = nullptr;
+	}
 	if (ActivationAudioComponent && ActivationAudioComponent -> IsPlaying())
 	{
 		ActivationAudioComponent -> Stop();
@@ -123,5 +129,15 @@ void APressurePlates::DeactivateActors()
 		ActivationAudioComponent -> Stop();
 		ActivationAudioComponent -> DestroyComponent();
 		ActivationAudioComponent = nullptr;
+	}
+	if (DeactivationAudioComponent && DeactivationAudioComponent -> IsPlaying())
+	{
+		DeactivationAudioComponent -> Stop();
+		DeactivationAudioComponent -> DestroyComponent();
+		DeactivationAudioComponent = nullptr;
+	}
+	if (DeactivationSound)
+	{
+		DeactivationAudioComponent = UGameplayStatics::SpawnSound2D(GetWorld(), DeactivationSound, 1.0f, 1.0f, 0.0f, nullptr, false);
 	}
 }
