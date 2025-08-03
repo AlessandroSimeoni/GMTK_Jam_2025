@@ -23,6 +23,8 @@ protected:
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Locomotion")
 	float PlayerVelocity = 0.0f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Locomotion")
+	float HorizontalPlayerVelocity = 0.0f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Locomotion")
 	bool IsJumping = false;
 
