@@ -38,8 +38,12 @@ protected:
 	int32 OverlappedActors = 0;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	USoundBase* ActivationSound;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	USoundBase* DeactivationSound;
 	UPROPERTY(Transient)
 	TObjectPtr<UAudioComponent> ActivationAudioComponent;
+	UPROPERTY(Transient)
+	TObjectPtr<UAudioComponent> DeactivationAudioComponent;
 
 public:
 	virtual void BeginPlay() override;
