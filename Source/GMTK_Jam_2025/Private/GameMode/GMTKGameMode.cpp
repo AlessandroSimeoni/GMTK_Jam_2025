@@ -31,7 +31,7 @@ FName AGMTKGameMode::ReturnScore()
 			return Entry.ThresholdName;
 		}
 	}
-	return FName("None");
+	return ThresholdDataAsset -> Thresholds.Last().ThresholdName;
 }
 
 void AGMTKGameMode::Tick(float DeltaSeconds)
