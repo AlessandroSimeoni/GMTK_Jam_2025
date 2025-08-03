@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "GMTKGameMode.generated.h"
 
+class UThresholdDataAsset;
 /**
  * 
  */
@@ -16,4 +17,12 @@ class GMTK_JAM_2025_API AGMTKGameMode : public AGameModeBase
 
 public:
 	virtual void BeginPlay() override;
+	UFUNCTION(BlueprintCallable)
+	FName ReturnScore();
+protected:
+	UPROPERTY(BlueprintReadOnly)
+	float CurrentTime = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<UThresholdDataAsset> ThresholdDataAsset;
+	virtual void Tick(float DeltaSeconds) override;
 };

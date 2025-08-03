@@ -22,6 +22,22 @@ public:
 	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
 	FGameplayAttributeData PlayerSpeed;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,PlayerSpeed);
-
-	
+	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
+	FGameplayAttributeData WallPlayerSpeed;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,WallPlayerSpeed);
+	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
+	FGameplayAttributeData DefaultGravityScale;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,DefaultGravityScale);
+	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
+	FGameplayAttributeData WallGravityScale;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,WallGravityScale);
+	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
+	FGameplayAttributeData WallJumpYaw;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,WallJumpYaw);
+	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
+	FGameplayAttributeData WallJumpPitch;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,WallJumpPitch);
+	UPROPERTY(BlueprintReadOnly,Category="Base Stats")
+	FGameplayAttributeData WallJumpPower;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet,WallJumpPower);
 };
